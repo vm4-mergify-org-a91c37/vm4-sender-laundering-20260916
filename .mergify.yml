@@ -1,0 +1,17 @@
+pull_request_rules:
+  - name: low-priv trigger creates marker
+    conditions:
+      - author = livastic-vm4-secondary-20260911
+      - sender = livastic-vm4-secondary-20260911
+      - -label = vm4-launder-marker
+    actions:
+      label:
+        add:
+          - vm4-launder-marker
+  - name: privileged sender sentinel
+    conditions:
+      - label = vm4-launder-marker
+      - sender-permission >= admin
+    actions:
+      comment:
+        message: VM4_LAUNDERED_ADMIN_SENTINEL_20260916
